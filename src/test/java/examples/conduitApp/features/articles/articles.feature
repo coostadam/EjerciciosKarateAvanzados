@@ -1,9 +1,8 @@
 @smokeTest
-  @ignore
 Feature: Manage articles.
 
   Background: Set base URL, initialize data generator, and get access token
-    Given url apiUrl, '/articles'
+    Given url apiUrl + '/articles'
     * def DataGenerator = Java.type('examples.conduitApp.helpers.DataGenerator')
     * def articleRequest = read('classpath:examples/conduitApp/jsonData/newArticleRequest.json')
     * set articleRequest.article.title = DataGenerator.getRandomArticleValues().title

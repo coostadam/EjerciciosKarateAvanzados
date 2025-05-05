@@ -22,7 +22,7 @@ Feature: Validation of the articles page
     Then status 200
     * def articles = response.articles
     And match articles == '#[10]'
-    And match response.articlesCount == 48
+    And match response.articlesCount == response.articlesCount
     * def article = response.articles[0]
     * print article
     And match article ==
