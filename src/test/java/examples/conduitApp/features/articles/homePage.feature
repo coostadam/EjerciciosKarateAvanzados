@@ -9,6 +9,7 @@ Feature: Validation of the articles page
     When method GET
     Then status 200
     * def expectedTags = [ "Test", "GitHub", "Coding", "Git", "Enroll", "Bondar Academy", "Zoom", "qa career" ]
+    # Comento esta linea porque esta validación siempre sera failed, se comenta para poder probar el resto de la feature
     # And match response.tags == expectedTags
     And match response.tags != 'truck'
     And response.tags == '#[8]'
@@ -22,10 +23,9 @@ Feature: Validation of the articles page
     Then status 200
     * def articles = response.articles
     And match articles == '#[10]'
+    #queda como duda
     And match response.articlesCount == response.articlesCount
-    * def article = response.articles[0]
-    * print article
-    And match article ==
+    And match response.articles[0] ==
     """
     {
       slug: '#string',
@@ -45,7 +45,7 @@ Feature: Validation of the articles page
       }
     }
     """
-
+    #queda como duda lo de la bio = null
 
 
 

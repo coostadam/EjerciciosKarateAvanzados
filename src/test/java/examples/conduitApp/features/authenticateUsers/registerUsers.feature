@@ -14,7 +14,6 @@ Feature: Register Users in Conduit
   Scenario: Register a new user
     Given path 'users'
     And request userData
-    * print userData
     When method POST
     Then status 201
     And match response ==
@@ -53,4 +52,6 @@ Feature: Register Users in Conduit
       | #(userEmail)          | Karate1234 |              | {"errors":{"username":["can't be blank"]}}         |
       |                       | Karate1234 | #(username)  | { "errors": { "email": ["can't be blank"] } }      |
       | #(userEmail)          |            | #(username)  | { "errors": { "password": ["can't be blank"] } }   |
+
+    #queda como duda que en la request no se le asigna el valor de userEmail, username y password
 

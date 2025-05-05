@@ -26,7 +26,6 @@ Feature: Manage articles.
     When method GET
     Then status 200
     And response.articles[0].slug == slugID
-    * print response.articles
 
     Given path slugID
     When method DELETE
