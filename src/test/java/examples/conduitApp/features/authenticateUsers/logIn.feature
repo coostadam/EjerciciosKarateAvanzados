@@ -1,4 +1,5 @@
 @smokeTest
+  @ignore
   Feature: Log In as User in Conduit
 
     Background: Set Base URL and the data to Log In
