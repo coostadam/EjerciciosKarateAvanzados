@@ -30,29 +30,27 @@ Feature: Register Users in Conduit
     }
     """
 
-#  Scenario Outline: Validate error in the registration
-#    Given path 'users'
-#    And request
-#      """
-#    {
-#      "user": {
-#        "email": '<email>',
-#
-#        "password": '<password>',
-#        "username": '<username>'
-#      }
-#    }
-#    """
-#    Then status 422
-#    And match response.user == <error>
-#
-#    # aqui hay errores con la tabla examples
-#    Examples:
-#      | email                    | password     | username       | error                                              |
-#      | #(userEmail)             | "karate1234" | "karateRaul25" | {"errors":{"username":["has already been taken"]}} |
-#      | "karateRaul25@test.com"  | "karate1234" | #(username)    | {"errors":{"email":["has already been taken"]}}    |
-#      | #(userEmail)             | "karate1234" | ""             | {"errors":{"username":["can't be blank"]}}         |
-#      | ""                       | "karate1234" | #(username)    | {"errors":{"email":["can't be blank"]}}            |
-#      | #(userEmail)             | ""           | #(username)    | {"errors":{"password":["can't be blank"]}}         |
+  Scenario Outline: User Registration in Conduit
+    Given path 'users'
+    And request
+    """
+    {
+      "user": {
+        "email": "<email>",
+        "password": "<password>",
+        "username": "<username>"
+      }
+    }
+    """
+    When method Post
+    Then status 422
+    And match response == <error>
 
+    Examples:
+      | email                 | password   | username     | error                                              |
+      | #(userEmail)          | Karate1234 | KarateRaul25 | {"errors":{"username":["has already been taken"]}} |
+      | karateRaul25@test.com | Karate1234 | #(username)  | {"errors":{"email":["has already been taken"]}}    |
+      | #(userEmail)          | Karate1234 |              | {"errors":{"username":["can't be blank"]}}         |
+      |                       | Karate1234 | #(username)  | { "errors": { "email": ["can't be blank"] } }      |
+      | #(userEmail)          |            | #(username)  | { "errors": { "password": ["can't be blank"] } }   |
 
