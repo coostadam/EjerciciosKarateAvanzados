@@ -1,0 +1,11 @@
+{
+    "article": {
+        "title": "Articulo Prueba 13",
+        "description": "Testing exploratorio de API",
+        "body": "Hablemos de test",
+        "tagList": [
+            "testing exploratorio",
+            "testing unitario"
+        ]
+    }
+}
