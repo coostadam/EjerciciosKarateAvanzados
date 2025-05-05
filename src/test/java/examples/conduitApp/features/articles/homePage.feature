@@ -22,28 +22,31 @@ Feature: Validation of the articles page
     Then status 200
     * def articles = response.articles
     And match articles == '#[10]'
-    And match response.articlesCount == 10
+    And match response.articlesCount == 48
   #aqui hay error con el json
-    And match response.articles[0] == """ {
-      "article": {
-        "slug": "#string",
-        "title": "#string",
-        "description": "#string",
-        "body": "#string",
-        "tagList": "#array",
-        "createdAt": "#string",
-        "updatedAt": "#string",
-        "favorited": "#boolean",
-        "favoritesCount": "#number",
-        "author": {
-          "username": "#string",
-          "bio": "#null:string",
-          "image": "#string",
-          "following": "#boolean"
-        }
+    * def article = response.articles[0]
+    * print article
+    And match article ==
+    """
+    {
+      slug: '#string',
+      title: '#string',
+      description: '#string',
+      body: '#string',
+      tagList: '#array',
+      createdAt: '#string',
+      updatedAt: '#string',
+      favorited: '#boolean',
+      favoritesCount: '#number',
+      author: {
+        username: '#string',
+        bio: null,
+        image: '#string',
+        following: '#boolean'
       }
     }
     """
+
 
 
 

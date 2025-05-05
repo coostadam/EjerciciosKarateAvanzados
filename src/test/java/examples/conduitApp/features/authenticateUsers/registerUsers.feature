@@ -11,7 +11,6 @@ Feature: Register Users in Conduit
     * set userData.user.email = userEmail
     * set userData.user.password = 'karate1234'
 
-
   Scenario: Register a new user
     Given path 'users'
     And request userData
@@ -37,14 +36,15 @@ Feature: Register Users in Conduit
 #      """
 #    {
 #      "user": {
-#        "email": <email>,
-#        "password": <password>,
-#        "username": <username>
+#        "email": '<email>',
+#
+#        "password": '<password>',
+#        "username": '<username>'
 #      }
 #    }
 #    """
 #    Then status 422
-#    And match response == <error>
+#    And match response.user == <error>
 #
 #    # aqui hay errores con la tabla examples
 #    Examples:
