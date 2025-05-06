@@ -18,7 +18,13 @@ public class DataGenerator {
         return username;
     }
 
-        public static JSONObject getRandomArticleValues(){
+    public static String getRandomPassword() {
+        Faker faker = new Faker();
+        String pass = faker.random().nextInt(10, 1000) + faker.name().username().toUpperCase() + faker.random().nextInt(0, 100);
+        return pass;
+    }
+
+    public static JSONObject getRandomArticleValues() {
         Faker faker = new Faker();
         String title = faker.gameOfThrones().character();
         String description = faker.gameOfThrones().city();

@@ -7,6 +7,7 @@ Feature: Register Users in Conduit
     * def DataGenerator = Java.type('examples.conduitApp.helpers.DataGenerator')
     * def userEmail = DataGenerator.getRandomEmail()
     * def username = DataGenerator.getRandomUsername()
+    * def password = DataGenerator.getRandomPassword()
     * set userData.user.username = username
     * set userData.user.email = userEmail
     * set userData.user.password = 'karate1234'
@@ -47,9 +48,9 @@ Feature: Register Users in Conduit
     And match response == <error>
 
     Examples:
-      | email                 | password   | username     | error                                              |
-      | #(userEmail)          | Karate1234 | KarateRaul25 | {"errors":{"username":["has already been taken"]}} |
-      | karateRaul25@test.com | Karate1234 | #(username)  | {"errors":{"email":["has already been taken"]}}    |
-      | #(userEmail)          | Karate1234 |              | {"errors":{"username":["can't be blank"]}}         |
-      |                       | Karate1234 | #(username)  | {"errors":{"email":["can't be blank"]}}            |
-      | #(userEmail)          |            | #(username)  | {"errors":{"password":["can't be blank"]}}         |
+      | email                 | password    | username     | error                                              |
+      | #(userEmail)          | #(password) | KarateRaul25 | {"errors":{"username":["has already been taken"]}} |
+      | karateRaul25@test.com | #(password) | #(username)  | {"errors":{"email":["has already been taken"]}}    |
+      | #(userEmail)          | #(password) |              | {"errors":{"username":["can't be blank"]}}         |
+      |                       | #(password) | #(username)  | {"errors":{"email":["can't be blank"]}}            |
+      | #(userEmail)          |             | #(username)  | {"errors":{"password":["can't be blank"]}}         |

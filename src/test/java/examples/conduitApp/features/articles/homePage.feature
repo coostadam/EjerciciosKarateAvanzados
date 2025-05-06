@@ -1,4 +1,4 @@
-@smokeTest
+  @smokeTest
 Feature: Validation of the articles page
 
   Background: Set Base URL
@@ -13,7 +13,7 @@ Feature: Validation of the articles page
     And match response.tags == '#[10]'
     * print response.tags
 
-  Scenario: Validate the articles structure 
+  Scenario: Validate the articles structure
     Given path 'articles'
     And params { limit: 10, offset: 0 }
     When method GET
