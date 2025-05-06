@@ -1,5 +1,4 @@
 @smokeTest
-  @ignore
 Feature: Register Users in Conduit
 
   Background: Set Base URL and the data to register
@@ -14,6 +13,7 @@ Feature: Register Users in Conduit
     * set userData.user.password = 'karate1234'
 
   @ignore
+    # Only run when you want to test the registration of a new user
   Scenario: Register a new user
     Given path 'users'
     And request userData

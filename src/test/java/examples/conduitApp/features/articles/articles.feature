@@ -1,5 +1,4 @@
 @smokeTest
-  @ignore
 Feature: Manage articles.
 
   Background: Set base URL, initialize data generator, and get access token

@@ -20,7 +20,7 @@ public class DataGenerator {
 
     public static String getRandomPassword() {
         Faker faker = new Faker();
-        String pass = faker.internet().password(8, 26, true, true, true);
+        String pass = faker.internet().password(8, 20, true, true, true);
         return pass;
     }
 
