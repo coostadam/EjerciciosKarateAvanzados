@@ -10,10 +10,18 @@ Feature: Manage articles.
     * set articleRequest.article.body = DataGenerator.getRandomArticleValues().body
 
   Scenario: Create a new article
+    When method GET
+    Then status 200
+    * def articlesCount = response.articlesCount
+
     And request articleRequest
     When method POST
     Then status 201
-    And response.article.title == articleRequest.article.title
+    And match response.article.title == articleRequest.article.title
+
+    When method GET
+    Then status 200
+    And match response.articlesCount == articlesCount + 1
 
   Scenario: Create new article and delete the article
     And request articleRequest
@@ -25,7 +33,7 @@ Feature: Manage articles.
     And param offset = 0
     When method GET
     Then status 200
-    And response.articles[0].slug == slugID
+    And match response.articles[0].slug == slugID
 
     Given path slugID
     When method DELETE
@@ -35,7 +43,7 @@ Feature: Manage articles.
     And param offset = 0
     When method GET
     Then status 200
-    And response.articles[0].slug != slugID
+    And match response.articles[0].slug != slugID
 
 
 

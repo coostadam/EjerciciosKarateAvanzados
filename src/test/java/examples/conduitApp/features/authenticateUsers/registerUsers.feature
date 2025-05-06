@@ -32,7 +32,7 @@ Feature: Register Users in Conduit
   Scenario Outline: User Registration in Conduit
     Given path 'users'
     And request
-    """
+  """
     {
       "user": {
         "email": "<email>",
@@ -53,5 +53,5 @@ Feature: Register Users in Conduit
       |                       | Karate1234 | #(username)  | { "errors": { "email": ["can't be blank"] } }      |
       | #(userEmail)          |            | #(username)  | { "errors": { "password": ["can't be blank"] } }   |
 
-    #queda como duda que en la request no se le asigna el valor de userEmail, username y password
+
 

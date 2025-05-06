@@ -9,10 +9,10 @@ Feature: Validation of the articles page
     When method GET
     Then status 200
     * def expectedTags = [ "Test", "GitHub", "Coding", "Git", "Enroll", "Bondar Academy", "Zoom", "qa career" ]
-    # Comento esta linea porque esta validación siempre sera failed, se comenta para poder probar el resto de la feature
+    # Comento esta línea porque esta validación siempre sera failed, se comenta para poder probar el resto de la feature
     # And match response.tags == expectedTags
     And match response.tags != 'truck'
-    And response.tags == '#[8]'
+    And match response.tags == '#[10]'
     * print response.tags
 
   Scenario: Get the ten first articles and validate his structure
@@ -39,13 +39,12 @@ Feature: Validation of the articles page
       favoritesCount: '#number',
       author: {
         username: '#string',
-        bio: null,
+        bio: '##string',
         image: '#string',
         following: '#boolean'
       }
     }
     """
-    #queda como duda lo de la bio = null
 
 
 

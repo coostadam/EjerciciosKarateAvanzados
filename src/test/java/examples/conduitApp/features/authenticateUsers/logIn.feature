@@ -10,4 +10,4 @@
       And request userData
       When method POST
       Then status 200
-      And response.user.email == userData.user.email
+      And match response.user.email == userData.user.email
