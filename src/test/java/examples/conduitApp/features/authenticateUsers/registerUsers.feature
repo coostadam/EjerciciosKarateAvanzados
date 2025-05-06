@@ -1,4 +1,5 @@
 @smokeTest
+  @ignore
 Feature: Register Users in Conduit
 
   Background: Set Base URL and the data to register

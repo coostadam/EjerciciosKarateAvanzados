@@ -1,8 +1,9 @@
-  @smokeTest
+@smokeTest
 Feature: Validation of the articles page
 
   Background: Set Base URL
     * url apiUrl
+    * def TimeValidator = karate.read('classpath:examples/conduitApp/helpers/timeValidator.js')
 
   Scenario: Validate the tags
     Given path 'tags'
@@ -20,6 +21,20 @@ Feature: Validation of the articles page
     Then status 200
     * def articles = response.articles
     And match articles == '#[10]'
+    * def validateArticles =
+    """
+    function(articles) {
+      for (var i = 0; i < articles.length; i++) {
+        var fecha = articles[i].createdAt;
+        var esValida = TimeValidator.fn(fecha);
+        karate.log('valid:', esValida);
+        if(!esValida) {
+          karate.fail('The date is not valid');
+        }
+      }
+    }
+    """
+    * eval validateArticles(articles)
     And match each response.articles ==
     """
     {
