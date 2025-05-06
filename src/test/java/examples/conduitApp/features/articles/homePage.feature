@@ -27,9 +27,10 @@ Feature: Validation of the articles page
       for (var i = 0; i < articles.length; i++) {
         var fecha = articles[i].createdAt;
         var esValida = TimeValidator.fn(fecha);
-        karate.log('valid:', esValida);
         if(!esValida) {
           karate.fail('The date is not valid');
+        }else {
+          karate.log('The date is valid');
         }
       }
     }
