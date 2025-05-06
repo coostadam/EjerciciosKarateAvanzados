@@ -2,7 +2,7 @@
   Feature: Log In as User in Conduit
 
     Background: Set Base URL and the data to Log In
-      Given url apiUrl
+      * url apiUrl
       * def userData = read('classpath:examples/conduitApp/jsonData/dataLogin.json')
 
     Scenario: Successfully log in as a user

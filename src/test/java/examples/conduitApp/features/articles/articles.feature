@@ -2,7 +2,7 @@
 Feature: Manage articles.
 
   Background: Set base URL, initialize data generator, and get access token
-    Given url apiUrl + '/articles'
+    * url apiUrl + '/articles'
     * def DataGenerator = Java.type('examples.conduitApp.helpers.DataGenerator')
     * def articleRequest = read('classpath:examples/conduitApp/jsonData/newArticleRequest.json')
     * set articleRequest.article.title = DataGenerator.getRandomArticleValues().title
@@ -29,8 +29,10 @@ Feature: Manage articles.
     Then status 201
     * def slugID = response.article.slug
 
-    And param limit = 10
-    And param offset = 0
+    And params { limit: 10, offset: 0 }
+    When method GET
+    Then status 200
+
     When method GET
     Then status 200
     And match response.articles[0].slug == slugID
@@ -39,8 +41,7 @@ Feature: Manage articles.
     When method DELETE
     Then status 204
 
-    And param limit = 10
-    And param offset = 0
+    And params { limit: 10, offset: 0 }
     When method GET
     Then status 200
     And match response.articles[0].slug != slugID

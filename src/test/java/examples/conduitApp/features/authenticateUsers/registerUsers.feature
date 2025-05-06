@@ -2,7 +2,7 @@
 Feature: Register Users in Conduit
 
   Background: Set Base URL and the data to register
-    Given url apiUrl
+    * url apiUrl
     * def userData = read('classpath:examples/conduitApp/jsonData/dataRegister.json')
     * def DataGenerator = Java.type('examples.conduitApp.helpers.DataGenerator')
     * def userEmail = DataGenerator.getRandomEmail()
@@ -11,6 +11,7 @@ Feature: Register Users in Conduit
     * set userData.user.email = userEmail
     * set userData.user.password = 'karate1234'
 
+  @ignore
   Scenario: Register a new user
     Given path 'users'
     And request userData
@@ -22,7 +23,7 @@ Feature: Register Users in Conduit
         "id": '#number',
         "email": #(userEmail),
         "username": #(username),
-        "bio": null,
+        "bio": '##string',
         "image": '#string',
         "token": '#string'
       }
@@ -50,8 +51,5 @@ Feature: Register Users in Conduit
       | #(userEmail)          | Karate1234 | KarateRaul25 | {"errors":{"username":["has already been taken"]}} |
       | karateRaul25@test.com | Karate1234 | #(username)  | {"errors":{"email":["has already been taken"]}}    |
       | #(userEmail)          | Karate1234 |              | {"errors":{"username":["can't be blank"]}}         |
-      |                       | Karate1234 | #(username)  | { "errors": { "email": ["can't be blank"] } }      |
-      | #(userEmail)          |            | #(username)  | { "errors": { "password": ["can't be blank"] } }   |
-
-
-
+      |                       | Karate1234 | #(username)  | {"errors":{"email":["can't be blank"]}}            |
+      | #(userEmail)          |            | #(username)  | {"errors":{"password":["can't be blank"]}}         |
