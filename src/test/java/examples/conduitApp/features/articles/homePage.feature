@@ -14,28 +14,26 @@ Feature: Validation of the articles page
     And match response.tags == '#[10]'
     * print response.tags
 
-  Scenario: Validate the articles structure
+  Scenario: Validate the structure and createdAt format of the first 10 articles
     Given path 'articles'
     And params { limit: 10, offset: 0 }
     When method GET
     Then status 200
     * def articles = response.articles
     And match articles == '#[10]'
-    * def validateArticles =
-    """
+    # Validar formato de fechas con función externa
+    * def validateArticleDates =
+  """
     function(articles) {
       for (var i = 0; i < articles.length; i++) {
-        var fecha = articles[i].createdAt;
-        var esValida = TimeValidator.fn(fecha);
-        if(!esValida) {
-          karate.fail('The date is not valid');
-        }else {
-          karate.log('The date is valid');
+        var date = articles[i].createdAt;
+        if (!TimeValidator.fn(date)) {
+          karate.fail('Invalid createdAt date at index ' + i + ': ' + date);
         }
       }
     }
     """
-    * eval validateArticles(articles)
+    * eval validateArticlesDates(articles)
     And match each response.articles ==
     """
     {
