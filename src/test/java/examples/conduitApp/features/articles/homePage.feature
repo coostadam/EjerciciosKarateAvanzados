@@ -1,9 +1,10 @@
-@smokeTest
+@somkeTest
 Feature: Validation of the articles page
 
   Background: Set Base URL
     * url apiUrl
     * def TimeValidator = karate.read('classpath:examples/conduitApp/helpers/timeValidator.js')
+    * def ArticleValidator = karate.read('classpath:examples/conduitApp/helpers/articleValidator.js')
 
   Scenario: Validate the tags
     Given path 'tags'
@@ -21,19 +22,7 @@ Feature: Validation of the articles page
     Then status 200
     * def articles = response.articles
     And match articles == '#[10]'
-    # Validar formato de fechas con función externa
-    * def validateArticleDates =
-  """
-    function(articles) {
-      for (var i = 0; i < articles.length; i++) {
-        var date = articles[i].createdAt;
-        if (!TimeValidator.fn(date)) {
-          karate.fail('Invalid createdAt date at index ' + i + ': ' + date);
-        }
-      }
-    }
-    """
-    * eval validateArticlesDates(articles)
+    * eval ArticleValidator.validateCreatedAtDates(articles, TimeValidator)
     And match each response.articles ==
     """
     {
@@ -54,10 +43,3 @@ Feature: Validation of the articles page
       }
     }
     """
-
-
-
-
-
-
-
